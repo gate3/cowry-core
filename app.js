@@ -21,8 +21,11 @@ if(cluster.isMaster){
       .then(console.log, console.error) */
   
   /* cont.resolve('signupCtrl')(
-    {username:'doyinolarewaju',first_name: 'dddd', last_name:'ddd', password:'2222'}
+    {username:'doyinolarewaju3',first_name: 'dddd', last_name:'ddd', password:'2222'}
   ) */
+  cont.resolve('forgotPasswordCtrl')(
+    {username:'doyinolarewaju'}
+  ).then(console.log, console.error)
 }
 /* const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users'); */

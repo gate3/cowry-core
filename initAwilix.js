@@ -1,6 +1,7 @@
 const awilix = require('awilix');
 const container = awilix.createContainer();
 const bcrypt = require('bcrypt-nodejs');
+const randomstring = require("randomstring");
 
 const initialize = _ => (
     container.loadModules([
@@ -33,8 +34,11 @@ const initialize = _ => (
 // encryption for register and login or other password hashes
 container.register({
     encryptionHelper: awilix.asValue(bcrypt)
-})
+});
 
+container.register({
+    randomNumberGenerator: awilix.asValue(randomstring)
+});
 
 module.exports = {
     awilix,

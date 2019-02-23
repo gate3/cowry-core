@@ -19,7 +19,9 @@
     "http-errors": "~1.6.2",
     "joi": "14.3.1",
     "mongoose": "5.4.13",
+    "mongoose-trigger": "1.0.1",
     "morgan": "~1.9.0",
+    "randomstring": "1.1.5",
     "redis": "2.8.0",
     "stellar-sdk": "0.13.0"
   }

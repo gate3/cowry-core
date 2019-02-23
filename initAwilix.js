@@ -1,5 +1,6 @@
 const awilix = require('awilix');
 const container = awilix.createContainer();
+const bcrypt = require('bcrypt-nodejs');
 
 const initialize = _ => (
     container.loadModules([
@@ -18,7 +19,7 @@ const initialize = _ => (
             }
         ],
         [
-            './src/controllers/**/*.ctrl.js',
+            './src/**/*.ctrl.js',
             {
                 register: awilix.asFunction,
             }
@@ -28,6 +29,12 @@ const initialize = _ => (
         formatName:'camelCase',
     })
 );
+
+// encryption for register and login or other password hashes
+container.register({
+    encryptionHelper: awilix.asValue(bcrypt)
+})
+
 
 module.exports = {
     awilix,

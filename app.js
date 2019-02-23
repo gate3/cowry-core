@@ -6,25 +6,32 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 require('./src/helpers/db.helper');
-const cluster = require('cluster')
-
+const cluster = require('cluster');
 
 if(cluster.isMaster){
   const aw = require('./initAwilix')
   aw.initialize()
   const cont = aw.container;
-  cont.resolve('signupCtrl')(
-    {phone:'3333',first_name: 'dddd', last_name:'ddd', password:'2222'}
-  )
-  //console.log(cont.registrations);
+  //const redisHelper = cont.resolve('cacheHelper')
+  //redisHelper.getValueFromSet(redisHelper.CONSTANTS.USERNAMES)
+             //.then(console.log, console.error)
+  //redisHelper.addToSet(redisHelper.CONSTANTS.USERNAMES, 'dotin').then(console.log, console.error)
+  //console.log(cont.registrations)
+  /* cont.resolve('loginCtrl')({username:'doyinolarewaju', password:'2222'})
+      .then(console.log, console.error) */
+  
+  /* cont.resolve('signupCtrl')(
+    {username:'doyinolarewaju',first_name: 'dddd', last_name:'ddd', password:'2222'}
+  ) */
 }
 /* const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users'); */
 
 const app = express();
+app.get('/user/new', (req, res)=> res.render('signup'));
 // view engine setup
-/* app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade'); */
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -48,7 +55,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
 });
 
 module.exports = app;

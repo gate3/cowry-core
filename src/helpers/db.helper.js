@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 class DbHelper {
     constructor () {
-        this.options = {useNewUrlParser:true}
+        this.options = {
+            useNewUrlParser:true,
+            useCreateIndex: true,
+        }
         this.connection = null
         this.connect()
     }

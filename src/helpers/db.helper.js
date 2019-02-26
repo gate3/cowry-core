@@ -9,6 +9,7 @@ class DbHelper {
         this.connection = null
         this.connect()
     }
+
     connect () {
         this.connection = mongoose.connect(
             process.env.MONGO_URI,

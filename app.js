@@ -2,11 +2,10 @@ require('dotenv').config();
 
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+//const path = require('path');
 require('./src/helpers/db.helper');
 const cluster = require('cluster');
+const mws = require('./config/middlewares');
 
 if(cluster.isMaster){
   const aw = require('./initAwilix')
@@ -23,24 +22,24 @@ if(cluster.isMaster){
   /* cont.resolve('signupCtrl')(
     {username:'doyinolarewaju3',first_name: 'dddd', last_name:'ddd', password:'2222'}
   ) */
-  cont.resolve('forgotPasswordCtrl')(
+  /* cont.resolve('forgotPasswordCtrl')(
     {username:'doyinolarewaju'}
-  ).then(console.log, console.error)
+  ).then(console.log, console.error) */
 }
+
 /* const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users'); */
 
 const app = express();
-app.get('/user/new', (req, res)=> res.render('signup'));
+/* app.get('/user/new', (req, res)=> res.render('signup'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); */
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(mws);
+
+
+//app.use(express.static(path.join(__dirname, 'public')));
 
 /* app.use('/', indexRouter);
 app.use('/users', usersRouter); */

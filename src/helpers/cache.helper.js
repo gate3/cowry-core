@@ -6,7 +6,11 @@ class CacheHelper {
         this.CONSTANTS = {
             USERNAMES:'usernames'
         }
-        this.client = redis.createClient();
+        const options = {}
+        if(process.env.NODE_ENV === 'production'){
+            options['host'] = 'redis'
+        }
+        this.client = redis.createClient(options);
     }
 
     addToSet (key, value) {
